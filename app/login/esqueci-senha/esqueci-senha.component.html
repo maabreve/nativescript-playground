@@ -1,0 +1,79 @@
+<AbsoluteLayout>
+
+  <DockLayout
+    left="0"
+    top="0"
+    height="100%"
+    width="100%"
+    stretchLastChild="true"
+    class="container">
+
+    <StackLayout
+      dock="top"
+      class="label-text-container">
+
+      <StackLayout class="forgot-pass-area-label">
+        <Label
+          text="Esqueci minha senha"
+          class="forgot-pass-label"></Label>
+      </StackLayout>
+
+      <Label
+        text="Digite seu email abaixo para recuperar a sua senha."
+        class="forgot-pass-tex-label"></Label>
+
+      <TextField
+        hint="E-mail"
+        [(ngModel)]="user.email"
+        [isEnabled]="!isAuthenticating"
+        keyboardType="email"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-email"></TextField>
+
+      <TextField
+        hint="Confirmar e-mail"
+        [(ngModel)]="confirmEmail"
+        [isEnabled]="!isAuthenticating"
+        keyboardType="email"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-email"></TextField>
+
+    </StackLayout>
+
+    <GridLayout
+      dock="bottom"
+      columns="auto,*,auto"
+      rows="auto"
+      class="buttons-area">
+
+      <Button
+        #buttonBack
+        text="Voltar"
+        class="{{isAuthenticating ? 'back-button-deactive' : 'back-button'}}"
+        (tap)="back()"
+        row="0"
+        col="0"
+        (touch)="onBackTouch($event, buttonBack)"
+        horizontalAlignment="left"></Button>
+
+      <Button
+        #buttonSubmit
+        text="Enviar"
+        class="{{isAuthenticating ? 'submit-button-deactive' : 'submit-button'}}"
+        (tap)="submit()"
+        row="0"
+        col="2"
+        (touch)="onSubmitTouch($event, buttonSubmit)"
+        horizontalAlignment="right"></Button>
+
+    </GridLayout>
+
+    <StackLayout></StackLayout>
+
+  </DockLayout>
+
+  <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

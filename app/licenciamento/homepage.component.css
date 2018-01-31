@@ -1,0 +1,98 @@
+.bg-green {
+	background-color: #00b4b9;
+}
+.top-bar {
+	height: 60;
+	background-color: #F5F5F5;
+	vertical-align: center;
+}
+.top-bar-label {
+	color: #00B4B9;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0 30;
+    text-transform: uppercase;
+	  horizontal-align: right;
+	  font-family: RobotoRegular;
+}
+.top-bar-drawer {
+	vertical-align: center;
+}
+.sairButton{
+  height: 60;
+}
+.top-bar-drawer-label {
+	  color: #00B4B9;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0 30;
+    text-transform: uppercase;
+	  horizontal-align: right;
+	  font-family: RobotoRegular;
+}
+.logoff-button-menu {
+    color: #00B4B9;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0 30;
+    text-transform: uppercase;
+}
+.logoff-button {
+    color: #ffffff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0 30;
+    text-transform: uppercase;
+}
+ListView {
+  color: #F5F5F5;
+  separator-color: #F5F5F5;
+}
+.home-menu {
+	background-color: #00b4b9;
+}
+.drawer-menu {
+	background-color: #FFF;
+}
+.logo-container {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  horizontal-align: center;
+}
+.logo-image {
+  margin-bottom: 10px;
+}
+Label {
+	text-transform: uppercase;
+}
+.home-menu Label {
+	color: #FFF;
+}
+.drawer-menu Label {
+	color: #676767;
+	font-size: 13px;
+}
+.home-menu .green-inea {
+	color: #FFF;
+}
+.drawer-menu .green-inea {
+	color: #00b4b9;
+}
+.drawer-menu .logo-title {
+  text-transform: uppercase;
+}
+.drawer-menu .logo-sub-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+}
+.drawer-menu .border-bottom-line {
+	background-color: #aaa;
+	opacity: 0.7;
+	height: 0.5;
+	width: auto;
+}

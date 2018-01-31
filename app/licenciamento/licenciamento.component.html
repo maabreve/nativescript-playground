@@ -1,0 +1,13 @@
+<ActionBar title="">
+  <NavigationButton icon="res://ic_menu" (tap)="toggle()"></NavigationButton>
+</ActionBar>
+<StackLayout>
+  <RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None"  gesturesEnabled="true">
+    <StackLayout tkDrawerContent class="drawer-content">
+        <IneaMenu class="drawer-menu" source="drawer"></IneaMenu>
+    </StackLayout>
+    <StackLayout tkMainContent>
+      <router-outlet></router-outlet>
+    </StackLayout>
+  </RadSideDrawer>
+</StackLayout>

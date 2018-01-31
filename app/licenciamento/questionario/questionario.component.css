@@ -1,0 +1,25 @@
+.titulo-questao {
+  margin-bottom: 10px;
+}
+.licenciamento-input.check {
+  opacity: 0.7;
+}
+.licenciamento-input {
+  padding-right: 1;
+}
+.item-resposta {
+  padding-left: 9;
+}
+.item-atividade{
+  margin-bottom: 10px;
+}
+
+.button-sumary-left {
+    height: 39px;
+    width: 500px;
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    border-width: 1; 
+    text-align: center;
+}

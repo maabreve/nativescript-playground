@@ -1,0 +1,29 @@
+.fab-button {
+    height: 70;
+    margin: 15;
+    background-color: #00b4b9; 
+    horizontal-align: right; 
+    vertical-align: bottom; 
+	z-index: 100000;
+}
+.mapaLocate {
+	left: 10;
+    right: 10; 
+    top: 120;
+    bottom: 190
+}
+.atividade-arrow {
+    padding: 8px 30px;
+}
+.licenciamento-input.check {
+  opacity: 0.7;
+}
+.licenciamento-input {
+  padding-right: 1;
+}
+.item-resposta {
+  padding-left: 9;
+}
+.title-margin-bottom {
+    margin-bottom: 10;
+}

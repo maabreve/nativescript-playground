@@ -1,0 +1,205 @@
+<!-- *************** LISTA *************** -->
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%" [backgroundColor]="colorView"  visibility="{{ viewType === 'list' ? 'visible' : 'collapsed'  }}">
+        <AbsoluteLayout>
+            <StackLayout left="0" top="0" height="100%" width="100%">
+                <RadSideDrawer #bottomDrawer [transition]="sideDrawerTransition" selectionBehavior="None" drawerLocation="Bottom" drawerContentSize="400"
+                    gesturesEnabled="false" (drawerClosing)="onDrawerClosing()" (drawerOpened)="onDrawerOpened()">
+
+                    <StackLayout tkMainContent [backgroundColor]="colorView" color="#FFFFFF">
+                        <GridLayout rows="*, 80" [backgroundColor]="colorView" color="#FFFFFF">
+                            <StackLayout row="0" horizontalAlignment="left">
+                                <StackLayout class="top">
+                                    <StackLayout class="title-page margin-botton-10">
+                                        <Label textWrap="false" text="Selecione a sua região" class="title-top"></Label>
+                                        <StackLayout class="title-line"></StackLayout>
+                                        <Label textWrap="true" text="Selecione os municípios onde está localizado o seu empreendimento" class="title-bottom"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <ListView [items]="municipioListView" separatorColor="#00000000">
+                                    <template let-item="item">
+                                        <ScrollView id="main">
+                                            <StackLayout (tap)="onCheck(item)">
+                                                <GridLayout columns="55, *" class="{{ item.selecionado ? 'item-check' : '' }}">
+                                                    <Label col="0" text="{{ item.selecionado ? '&#xe917;' : '&#xe900;' }}" isEnabled="{{ !isLoading }}" horizontalAlignment="right"
+                                                        verticalAlignment="center" class="opac {{ item.selecionado ? 'icon check-completed' : 'icon check' }}"></Label>
+
+                                                    <Label col="1" [text]="item.nome" textWrap="true" class="high-spacing item-label" isEnabled="{{ !isLoading }}" verticalAlignment="center"></Label>
+
+                                                </GridLayout>
+
+                                                <StackLayout class="item-container">
+                                                    <StackLayout class="line-container">
+                                                        <StackLayout class="border-bottom-line" visibility="{{ item.selecionado ? 'collapsed' : 'visible' }}"></StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </template>
+                                </ListView>
+                            </StackLayout>
+
+                            <GridLayout row="1" rows="10, *, 10" columns="*, 20, *" class="summary">
+                                <GridLayout row="1" col="0" columns="*, 10, *, 10, *">
+                                
+                                    <Button row="0" col="0" (tap)="onNavigationBack()" 
+                                        (touch)="onVoltarTouch($event)" 
+                                        [backgroundColor]="colorButtonVoltar"
+                                        class="icon {{ canBackNavigation && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                                        text="&#xe908;" 
+                                        isEnabled="{{ canBackNavigation  && !isLoading }}">
+                                    </Button>
+                                
+                                    <StackLayout row="0" col="1"></StackLayout>
+                                    
+                                    <Button row="0" col="2" (tap)="toggleDrawer()"  
+                                        (touch)="onBreadcrumbTouch($event)" 
+                                        [backgroundColor]="colorButtonBreadcrumb"
+                                        class="icon {{ !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                                        isEnabled="{{ !isLoading }}"
+                                        text="&#xe916;">
+                                    </Button>
+
+                                    <StackLayout row="0" col="3"></StackLayout>
+                                    
+                                    <Button text="&#xe913;" row="0" col="4" 
+                                            (touch)="onMapaTouch($event)" (tap)="showMap()" 
+                                            [backgroundColor]="colorButtonMapa"
+                                            class="icon {{ selectedCount > 0  && !isLoading  ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                                            isEnabled="{{ selectedCount > 0  && !isLoading }}">
+                                    </Button>
+                                </GridLayout>
+
+                                <StackLayout row="1" col="1">
+                                </StackLayout>
+
+                                <Button text="CONTINUAR" row="1" col="2" [backgroundColor]="colorButtonContinuar" 
+                                    (touch)="onContinuarTouch($event)" 
+                                    (tap)="onAnswer()" 
+                                    class="{{ selectedCount > 0 && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                                    isEnabled="{{ selectedCount > 0  && !isLoading }}">
+                                </Button>
+                            </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
+
+                    <StackLayout tkDrawerContent class="bottom-drawer-content">
+                        <StackLayout class="breadcrumb-container">
+                            <ScrollView>
+                                <StackLayout>
+                                <StackLayout *ngFor="let item of breadcrumbList">
+
+                                    <StackLayout *ngIf="!item.active" class="breadcrumb-item" (tap)="onBreadcrumbItemTap(item)">
+                                        <GridLayout rows="*" columns="25, *, 25">
+                                        <Label row="0" col="0" class="icon" text="&#xe906;"
+                                                style="color: #00b4b9; margin-top: 3px"></Label>
+
+                                        <Label row="0" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+                                        </GridLayout>
+                                    </StackLayout>
+
+                                    <StackLayout *ngIf="item.active" class="breadcrumb-item-active" (tap)="onBreadcrumbItemTap(item)">
+                                        <GridLayout rows="*, *, *, *, *" columns="30, *, 5, 30">
+
+                                        <Label row="0" col="1" textWrap="true" text="{{ item.current ? 'Você está aqui' : 'Você passou por aqui' }}" class="sub-titulo"></Label>
+
+                                        <Label row="1" col="0" class="icon" text="&#xe903;"
+                                                style="color: #FFFFFF; margin-top: 3px"></Label>
+
+                                        <Label row="1" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+
+                                        <StackLayout row="2" colSpan="2" class="title-line"></StackLayout>
+
+                                        <StackLayout row="2" col="3" class="simbol-doubt" backgroundColor="#FFFFFF" (tap)="onBreadcrumbNavigate(item)">
+                                            <Label class="icon" text="&#xe907;" color="#006eb9"></Label>
+                                        </StackLayout>
+
+                                        <Label *ngIf="!item.current" row="3" col="1" textWrap="true"  class="sub-titulo" text="Sua resposta foi"></Label>
+                                        <Label row="4" col="1" textWrap="true" [text]="item.respostasTexto"></Label>
+
+                                        </GridLayout>
+                                    </StackLayout>
+
+                                </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </StackLayout>
+                </RadSideDrawer> 
+            </StackLayout>
+            <StackLayout [left]="buttonCloseDrawerWidth" [top]="buttonCloseDrawerHeigth" visibility="{{ showBottom ? 'visible' : 'collapsed' }}">
+                <StackLayout class="simbol-doubt-drawer" borderWidth="1" borderColor="#FFFFFF" backgroundColor="#F5F5F5" (tap)="closeDrawer()">
+                    <Label class="icon" text="&#xe90a;" color="#00B4B9"></Label>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </StackLayout>
+    
+    
+    <!-- *************** MAPA *************** -->
+    <StackLayout left="0" top="0" height="100%" width="100%" visibility="{{ viewType === 'map' ? 'visible' : 'collapsed'  }}">
+        <GridLayout rows=" *, 80" backgroundColor="#F5F5F5">
+            <StackLayout row="0" rows="60, *">
+                <TextView row="0" #sb hint=" &#xe902; PESQUISAR"  class="icon search-button" [text]="searchPlace" [(ngModel)]="searchPlace"></TextView>
+
+                <ListView row="1" [items]="resultSearchList" class="">
+                    <template let-item="item">
+                        <ScrollView>
+                            <StackLayout (tap)="selectResult(item)" class="search-container">
+                                <Label col="1" [text]="item.format_address" class="medium-spacing"></Label>
+                            </StackLayout>
+                        </ScrollView>
+                    </template>
+                </ListView>
+                <ContentView row="1" height="*" width="*" visibility="{{ showMapView ? 'visible' : 'collapsed'  }}" backgroundColor="#F5F5F5">
+                    <MapView #MapView latitude="{{ latitude }}" longitude="{{ longitude }}" zoom="{{ zoom }}" (mapReady)="onMapReady($event)"
+                        (markerSelect)="onMarkerSelect($event)" (coordinateTapped)="onCoordinateTapped($event)">
+                    </MapView>
+                </ContentView>
+            </StackLayout>
+
+            <GridLayout row="1" rows="10, *, 10" columns="*, 20, *" class="summary">
+                <GridLayout row="1" col="0" columns="*, 10, *, 10, *">
+                    <Button row="0" col="0" 
+                        text="&#xe908;" 
+                        (tap)="showList()" 
+                        (touch)="onVoltarTouch($event)" 
+                        [backgroundColor]="colorButtonVoltar"
+                        isEnabled="{{ selectedCount > 0 && !isLoading }}"
+                        class="icon {{ !isLoading ?  'button-sumary' : 'button-sumary-disabled' }}">
+                    </Button>
+                    
+                    <StackLayout row="0" col="1">
+                    </StackLayout>
+                    
+                   <!--
+                    <Button row="0" col="2"  (tap)="onBreadcrumbTap()"  
+                        (touch)="onBreadcrumbTouch($event)" 
+                        [backgroundColor]="colorButtonBreadcrumb"
+                        class="icon {{ !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                        isEnabled="{{ !isLoading }}"
+                        text="&#xe916;">
+                    </Button>
+                    -->
+
+                </GridLayout>
+
+                <StackLayout row="1" col="1">
+                </StackLayout>
+
+                <Button text="CONTINUAR" row="1" col="2" [backgroundColor]="colorButtonContinuar" (touch)="onContinuarTouch($event)"
+                    (tap)="onAnswer()" class="{{ selectedCount > 0 && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }}"
+                    isEnabled="{{ selectedCount > 0 && !isLoading }}">
+                </Button>
+            </GridLayout>
+
+            <StackLayout col="0" row="0" height="100 %" width="100%" [class]="isLoading ? 'animatedFadeIn' : 'animatedFadeOut'" style="opacity:0;background-color:rgba(255, 255, 255, 1);"></StackLayout>
+
+            <Fab icon="res://lixeira" rippleColor="#ffffff" class="fab-button" (tap)="onFabTap(MapView)" isEnabled="{{ selectedCount > 0 && !isLoading }}"></Fab>
+        </GridLayout>
+    </StackLayout>
+
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" [class]="viewType === 'map'  ? 'active-indicator-map' : 'active-indicator-sm'"></ActivityIndicator>
+
+</AbsoluteLayout>

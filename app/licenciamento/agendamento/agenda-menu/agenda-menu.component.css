@@ -1,0 +1,21 @@
+GridLayout {
+	color: #FFF;
+	padding: 20 40 40 40;
+}
+ListView {
+  separator-color: none;
+  border-bottom-color: red;
+}
+
+.agendar-button {
+	/*background-color: #0f6fb7;*/
+}
+
+.visualizar-button {
+	/*background-color: #92b81f;*/
+}
+
+.button-label {
+	font-family: 'Roboto';
+	font-size: 20;
+}

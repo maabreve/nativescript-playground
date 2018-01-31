@@ -1,0 +1,19 @@
+.main {
+  background-color:  rgba(0, 180, 185, 1);
+}
+.pad {
+  padding: 0 20;
+}
+.title2 {
+    font-family: 'Roboto', sans-serif ;
+    font-style: normal;
+    color: rgba(245, 245, 245, 1);
+    text-transform: uppercase;
+}
+
+.background {
+  background-image: url("res://ondas");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+}

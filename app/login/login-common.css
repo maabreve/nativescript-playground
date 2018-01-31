@@ -1,0 +1,145 @@
+/* Hide a bunch of things to setup the initial animations */
+.form-controls, .sign-up-stack {
+  opacity: 0;
+}
+
+.initial-container, .main-container {
+  margin-top: 0;
+  /*background-image: url("res://ondas");*/
+
+  background-image: url("res://background");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /*background-image: url("res://tela1");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/
+}
+
+.initial-logo {
+  horizontal-align: center;
+  margin-top: 5;
+  margin-left: 100;
+  margin-right: 100;
+  margin-bottom: 30;
+}
+
+.initial-label {
+  color: white;
+  horizontal-align: center;
+  margin-bottom: 80;
+}
+
+.initial-button {
+  height: 38;
+  margin-bottom: 3;
+  border-style: solid;
+  border-width: 1;
+  border-color: #16b4b8;
+  margin-left: 23;
+  margin-right: 23;
+  vertical-align: center;
+}
+
+Label.initial-button-label {
+  color: #16b4b8;
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  horizontal-align: center;
+}
+
+.initial-singup-btn, .login-singup-btn {
+  /*background-color: #16b4b8;*/
+  color: white;
+  margin-left: 20;
+  margin-right: 20;
+  box-shadow: 0;
+  text-transform: uppercase;
+}
+
+.main-container {
+  visibility: collapse;
+  opacity: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.login-logo {
+  horizontal-align: center;
+  margin-top: 25;
+  margin-left: 100;
+  margin-right: 100;
+  margin-bottom: 42;
+}
+
+TextField {
+  font-family: 'Roboto';
+  margin-left: 22;
+  margin-right: 22;
+  border-style: solid;
+  border-width: 1;
+  border-color: #666666;
+  margin-bottom: 2;
+  placeholder-color: #bdbdbd;
+  placeholder-font: 'Roboto';
+}
+
+TextField.text-password {
+  margin-bottom: 0;
+}
+
+.forgot-submit-area {
+  margin-top: 0;
+}
+
+.submit-button {
+  /*background-color: #666666;*/
+  color: white;
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 1;
+  border-color: #666666;
+}
+
+Label.forgot-password-label {
+  font-family: 'Roboto';
+  font-size: 13;
+  /*color: #666666;*/
+  margin-top: 25;
+  padding-top: 6;
+  text-transform: none !important;
+}
+
+.facebook-button, .google-button {
+  font-family: 'Roboto';
+  background-color: transparent;
+  border-style: solid;
+  border-width: 1;
+  margin-left: 22;
+  margin-right: 22;
+  height: 40;
+  text-transform: uppercase;
+}
+
+.facebook-button {
+  color: #3d5a96;
+  border-color: #3d5a96;
+  margin-top: 15;
+}
+
+.google-button {
+  color: #d42b28;
+  border-color: #d42b28;
+  margin-top: 10;
+}
+
+.login-singup-btn {
+  font-family: 'Roboto';
+  margin-top: 10;
+}
+
+.active-indicator-sm {
+  color: #666666;
+}

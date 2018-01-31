@@ -1,0 +1,151 @@
+<AbsoluteLayout>
+
+  <GridLayout
+    left="0"
+    top="0"
+    height="100%"
+    width="100%">
+
+    <!-- tela inicial -->
+    <DockLayout  #initialContainer
+      stretchLastChild="true"
+      height="100%"
+      class="initial-container">
+
+      <StackLayout dock="top">
+        <Image
+          src="res://logo2"
+          stretch="aspectFit"
+          class="initial-logo"></Image>
+
+        <StackLayout
+          (tap)="showMainContent()"
+          [backgroundColor]="colorButtonAcessar"
+          (touch)="onMainContentTouch($event)"
+          class="initial-button">
+          <Label
+            text="acessar conta"
+            class="initial-button-label"></Label>
+        </StackLayout>
+
+          <Button
+            text="cadastre-se"
+            (tap)="signUp()"
+            (touch)="onSignUpTouch($event)"
+            [backgroundColor]="colorButtonCadastrar"
+            class="initial-singup-btn"></Button>
+      </StackLayout>
+
+      <Image
+        dock="bottom"
+        class="initial-ondas"
+        src="res://ondas"
+        stretch="none"
+        scaleX="1.3"
+        scaleY="1.3"
+        translateY="40"></Image>
+
+      <StackLayout></StackLayout>
+
+    </DockLayout>
+
+
+    <!-- tela de login -->
+    <StackLayout #mainContainer
+      class="main-container"
+      width="100%"
+      height="100%">
+
+      <Image
+        src="res://logo"
+        stretch="aspectFit"
+        class="login-logo"
+        ></Image>
+
+      <TextField
+        hint="Login"
+        keyboardType="email"
+        returnKeyType="next"
+        (returnPress)="focusPassword()"
+        [(ngModel)]="user.email"
+        [isEnabled]="!isAuthenticating"
+        autocorrect="false"
+        autocapitalizationType="none"
+        [class.light]="!isLoggingIn"></TextField>
+
+      <TextField #password
+        hint="******"
+        secure="true"
+        returnKeyType="done"
+        class="text-password"
+        (returnPress)="submit()"
+        [(ngModel)]="user.password"
+        [isEnabled]="!isAuthenticating"
+        [class.light]="!isLoggingIn"></TextField>
+
+      <GridLayout
+        rows="auto"
+        columns="22,auto,*,auto,22"
+        width="100%"
+        class="forgot-submit-area">
+
+        <Label
+          class="forgot-password-label"
+          text="Esqueci minha senha"
+          (tap)="forgotPassword()"
+          row="0"
+          col="1"
+          colSpan="3"
+          (touch)="onForgotPasswordTouch($event)"
+          [color]="colorButtonForgotPassword"
+          horizontalAlignment="left"></Label>
+
+        <Button
+          text="acessar conta"
+          [isEnabled]="!isAuthenticating"
+          class="submit-button"
+          (tap)="login()"
+          row="0"
+          col="3"
+          (touch)="onLoginTouch($event)"
+          [backgroundColor]="colorButtonLogin"
+          horizontalAlignment="right"
+          width="164"></Button>
+
+      </GridLayout>
+
+      <Button
+        text="acessar com perfil do facebook"
+        (tap)="loginFacebook()"
+        (touch)="onLoginFacebookTouch($event)"
+        [backgroundColor]="colorButtonLoginFacebook"
+        class="facebook-button"></Button>
+
+      <Button
+        text="acessar com conta google"
+        (tap)="loginGoogle()"
+        (touch)="onLoginGoogleTouch($event)"
+        [backgroundColor]="colorButtonLoginGoogle"
+        class="google-button"></Button>
+
+      <Button
+        text="cadastre-se"
+        (tap)="signUp()"
+        (touch)="onSignUpTouch($event)"
+        [backgroundColor]="colorButtonCadastrar"
+        class="login-singup-btn"></Button>
+
+      <Image
+        src="res://ondas"
+        stretch="none"
+        scaleX="1.0"
+        scaleY="1.0"
+        class="initial-ondas"
+        translateY="60"></Image>
+
+    </StackLayout>
+
+  </GridLayout>
+  
+  <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

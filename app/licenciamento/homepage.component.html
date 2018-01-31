@@ -1,0 +1,36 @@
+<AbsoluteLayout>
+  <StackLayout class="bg-green" left="0" top="0" height="100%" width="100%">
+    <StackLayout left="0" top="0" height="100%" width="100%">
+      <StackLayout class="top-bar">
+        <StackLayout class="avatar">
+        </StackLayout>
+        <StackLayout (tap)="onLogoff()">
+          <Label text="Sair" class="top-bar-label"></Label>
+        </StackLayout>
+      </StackLayout>
+      <StackLayout class="box-container">
+        <StackLayout class="{{ class }}">
+          <StackLayout class="logo-container">
+            <StackLayout class="logo-image">
+              <Image src="res://logo_login" stretch="none"></Image>
+            </StackLayout>
+            <StackLayout class="line"></StackLayout>
+            <Label text="Licenciamento" class="green-inea logo-title"></Label>
+            <Label text="Ambiental" class="green-inea logo-sub-title"></Label>
+          </StackLayout>
+
+          <ListView text-align="left" #menu [items]="menuList" row="1" class="small-spacing" 
+            [class.visible]="listLoaded" (itemTap)="onTap($event)"
+            [isEnabled]="!isLoadingMenu">
+            <template let-item="item">
+              <Label textWrap="true" row="0" col="0" [text]="item.label" class="high-spacing"></Label>
+              <!-- <StackLayout row="1" col="0" class="border-bottom-line"></StackLayout> -->
+            </template>
+          </ListView>
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+  </StackLayout>
+  <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoadingMenu" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

@@ -1,0 +1,48 @@
+
+<DockLayout
+ stretchLastChild="true"
+ height="100%"
+ class="container">
+
+  <GridLayout
+    dock="bottom"
+    columns="*,auto"
+    rows="auto"
+    class="buttons-area">
+
+    <Button
+      text="Novo agendamento"
+      class="new-button"
+      (tap)="novoAgend()"
+      row="0"
+      col="1"
+      horizontalAlignment="right"></Button>
+
+  </GridLayout>
+
+  <ScrollView
+    dock="top"
+    class="">
+
+    <AbsoluteLayout class="content">
+        <StackLayout left="0" top="0" width="100%">
+
+          <StackLayout class="linha-itens" *ngFor="let d of dias">
+
+              <GridLayout class="" columns="*,40" rows="40">
+                  <Label class="" [text]="d.dia" textWrap="true" row="0" col="0"></Label>
+                  <StackLayout class="simbol-doubt" row="0" col="1">
+                      <Label class="icon" text="&#xe904;" verticalAlignment="center" (tap)="deleteAgenda(d)"></Label>
+                  </StackLayout>
+              </GridLayout>
+
+          </StackLayout>
+
+        </StackLayout>
+        <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+      </AbsoluteLayout>
+
+  </ScrollView>
+
+
+</DockLayout>

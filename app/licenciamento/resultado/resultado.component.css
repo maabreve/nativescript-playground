@@ -1,0 +1,22 @@
+.result {
+	background-color: #006eb9;
+	color: #FFF;
+	padding: 30px;
+}
+
+GridLayout {
+	padding: 5px 0;
+}
+
+/*Page Title*/
+.title-line {
+  background-color: #333;
+  height: 0.5;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.light {
+  background-color: #ccc;
+}
+

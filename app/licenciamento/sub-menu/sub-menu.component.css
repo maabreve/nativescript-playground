@@ -1,0 +1,12 @@
+GridLayout {
+	color: #FFF;
+	padding: 20 40 40 40;
+}
+ListView {
+  separator-color: none;
+  border-bottom-color: red;
+}
+
+.textMenu {
+	font-size: 20;
+}

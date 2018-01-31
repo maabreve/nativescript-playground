@@ -1,0 +1,13 @@
+<AbsoluteLayout>
+  <StackLayout left="0" top="0" height="100%" width="100%">
+
+    <GridLayout class="main" rows="*, *">
+      <StackLayout class="pad" row="0" verticalAlignment="bottom">
+        <Label class="title2" text="AGUARDE, SEUS DADOS ESTÃO SENDO CARREGADOS..."></Label>
+      </StackLayout>
+      <GridLayout row="1" #background class="background"></GridLayout>
+    </GridLayout>
+
+  </StackLayout>
+  <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

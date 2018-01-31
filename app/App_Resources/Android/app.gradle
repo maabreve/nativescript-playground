@@ -1,0 +1,42 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.google.gms:google-services:3.0.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+android {
+  defaultConfig {
+    generatedDensities = []
+    applicationId = "id.inea.licenciamento"
+    multiDexEnabled true
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}
+
+dependencies {
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile 'com.google.android.gms:play-services-auth:+'
+
+    compile('com.twitter.sdk.android:twitter:1.13.2@aar') {
+        transitive = true
+    }
+}

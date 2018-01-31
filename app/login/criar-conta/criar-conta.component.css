@@ -1,0 +1,92 @@
+.container {
+  /*background-image: url("res://tela2b");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;*/
+  background-color: #16b4b8;
+}
+
+.label-text-container {
+  margin-top: 50;
+  margin-left: 22;
+  margin-right: 22;
+}
+
+.create-account-area-label {
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 1;
+  border-bottom-color: white;
+  margin-bottom: 6;
+}
+
+.create-account-label {
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  font-size: 16;
+  color: white;
+  margin-bottom: 6;
+}
+
+.create-account-tex-label {
+  font-family: 'Roboto';
+  font-size: 12;
+  margin-bottom: 8;
+  color: white;
+}
+
+TextField {
+  font-family: 'Roboto';
+  border-style: solid;
+  border-width: 1;
+  border-color: #666666;
+  margin-top: 10;
+  placeholder-color: #bdbdbd;
+  placeholder-font: 'Roboto';
+  background-color: white;
+}
+
+.buttons-area {
+  background-color: #fafafa;
+  padding-left: 22;
+  padding-right: 22;
+  padding-top: 12;
+  padding-bottom: 12;
+}
+
+.back-button {
+  background-color: transparent;
+  color: #16b4b8;
+  border-color: #16b4b8;
+}
+
+.back-button-deactive {
+  background-color: transparent;
+  color: #97dedf;
+  border-color: #97dedf;
+}
+
+.submit-button {
+  color: white;
+  background-color: #16b4b8;
+  border-color: #16b4b8;
+}
+
+.submit-button-deactive {
+  color: white;
+  background-color: #97dedf;
+  border-color: #97dedf;
+}
+
+Button {
+  text-transform: uppercase;
+  border-style: solid;
+  border-width: 1;
+  border-color: #97dedf;
+  height: 40;
+  width: 110;
+}
+
+.active-indicator-sm {
+  color: #666666;
+}

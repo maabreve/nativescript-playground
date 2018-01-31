@@ -1,0 +1,209 @@
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%">
+
+        <RadSideDrawer #bottomDrawer [transition]="sideDrawerTransition" selectionBehavior="None" drawerLocation="Bottom" drawerContentSize="400"
+             gesturesEnabled="false" (drawerClosing)="onDrawerClosing()" (drawerOpened)="onDrawerOpened()">
+
+            <StackLayout tkMainContent [backgroundColor]="colorView" color="#FFFFFF">
+                 <AbsoluteLayout>
+                    <StackLayout left="0" top="0" height="100%" width="100%">
+                        <GridLayout rows="*, 80" [backgroundColor]="colorView" color="#FFFFFF">
+                            <StackLayout row="0" horizontalAlignment="left">
+                                
+                                <StackLayout class="title-page titulo-questao">
+                                    <Label text="{{ mindMap === 'true' ? questaoAtual : nomeQuestionario }}" textWrap="true" class="title-top"></Label>
+                                    <StackLayout class="title-line"></StackLayout>
+                                    <Label *ngIf="mindMap === 'false'" [text]="questaoAtual" textWrap="true" class="title-bottom"></Label>
+                                    <Label *ngIf="mindMap === 'true'" text="Escolha a opção desejada abaixo." textWrap="true" class="title-bottom"></Label>
+                                    <StackLayout style="margin-bottom: 15px"></StackLayout>
+                                    
+                                    <GridLayout rows="50", columns="*, *" *ngIf="mostrarSaibaMais">
+                                        <Button row="0" col="0"  text="SAIBA MAIS" 
+                                            (tap)="toggleDrawer(1)" 
+                                            (touch)="onSaibaMaisTouch($event)" 
+                                            [backgroundColor]="colorButtonSaibaMais"
+                                            class="button-sumary-left"></Button>
+                                    </GridLayout>
+                                    
+                                    <Button  [text]="atividadesSelecionadasTextButton" 
+                                        *ngIf="mostraAtividadesSelecionadas"
+                                        (tap)="toggleDrawer(2)" 
+                                        (touch)="onAtividadesSelecionadasTouch($event)" 
+                                        [backgroundColor]="colorButtonAtividadesSelecionadas"
+                                        class="button-sumary-left-full"></Button>
+                                
+                                </StackLayout>
+
+                                <ListView #lstItem [items]="respotasListView" #mulitSelect visibility="{{ tipoResposta === 'CHECKBOX' ? 'visible' : 'collapsed'  }}">
+                                    <template let-item="item">
+                                        <ScrollView>
+                                            <StackLayout isEnable="{{ !isLoading }}" (tap)="onCheck(item)">
+                                                <GridLayout columns="55, *, 45" rows="auto" class="{{ item.selecionado ? 'item-check' : '' }}">
+                                                    <Label col="0" text="{{ item.selecionado ? '&#xe917;' : '&#xe900;' }}" horizontalAlignment="right" verticalAlignment="center"
+                                                        class="licenciamento-input opac {{ item.selecionado ? 'icon check-completed' : 'icon check' }}"></Label>
+
+                                                    <Label col="1" [text]="item.nome" paddingLeft="10" textWrap="true" class="high-spacing item-resposta" textWrap="true"></Label>
+                                                </GridLayout>
+                                                <StackLayout class="box-container">
+                                                    <StackLayout class="line-container">
+                                                        <StackLayout class="border-bottom-line" visibility="{{ item.selecionado ? 'collapsed' : 'visible' }}"></StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </template>
+                                </ListView>
+
+                                <ListView [items]="respotasListView" #oneSelect separatorColor="#00000000" visibility="{{ tipoResposta === 'RADIO' ? 'visible' : 'collapsed' }}">
+                                    <template let-item="item">
+                                        <ScrollView id="main">
+                                            <StackLayout isEnable="{{ !isLoading }}" (tap)="onSelect(item)">
+                                                <GridLayout columns="55, *, 45" rows="auto" class="{{ item.selecionado ? 'item-check' : '' }}">
+                                                    <Label col="0" text="{{ item.selecionado ? '&#xe915;' : '&#xe914;' }}" horizontalAlignment="right" verticalAlignment="center"
+                                                        class="licenciamento-input {{ item.selecionado ? 'icon check-completed' : 'icon check' }}">
+                                                    </Label>
+
+                                                    <Label col="1" [text]="item.nome" textWrap="true" class="high-spacing item-resposta" textWrap="true"></Label>
+
+                                                </GridLayout>
+                                                <StackLayout class="box-container">
+                                                    <StackLayout class="line-container">
+                                                        <StackLayout class="border-bottom-line" visibility="{{ item.selecionado ? 'collapsed' : 'visible' }}"></StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </ScrollView>
+                                    </template>
+                                </ListView>
+
+                                <StackLayout #textbox class="box-container" visibility="{{ tipoResposta === 'TEXTO' ? 'visible' : 'collapsed'  }}">
+                                    <TextField #respostaTextBox visibility="{{ tipoResposta === 'TEXTO' ? 'visible' : 'collapsed'  }}" (propertyChange)="onKeyPress($event)"
+                                        (returnPress)="onReturnPress()" [(ngModel)]="respostaTextoLivre" isEnable="{{ !isLoading }}" autocorrect="false"
+                                        autocapitalizationType="none">
+                                    </TextField>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <GridLayout row="1" rows="10, *, 10" columns="*, 20, *" class="summary">
+                                <GridLayout row="1" col="0" columns="*, 10, *, 10, *">
+                                    <Button row="0" col="0" (tap)="onNavigationBack()" 
+                                        (touch)="onVoltarTouch($event)" 
+                                        [backgroundColor]="colorButtonVoltar"
+                                        class="icon {{ canBackNavigation && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                                        text="&#xe908;" isEnabled="{{ canBackNavigation  && !isLoading }}">
+                                    </Button>
+
+                                    <StackLayout row="0" col="1">
+                                    </StackLayout>
+
+                                    <Button row="0" col="2" (tap)="onBreadcrumbTap()"
+                                        (touch)="onBreadcrumbTouch($event)" 
+                                        [backgroundColor]="colorButtonBreadcrumb"
+                                        class="icon {{ !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                                        isEnabled="{{ !isLoading }}"
+                                        text="&#xe916;">
+                                    </Button>
+                                </GridLayout>
+
+                                <StackLayout row="1" col="1">
+                                </StackLayout>
+
+                                <Button [text]="textoBotaoProximo" row="1" col="2" 
+                                        (tap)="onAnswer()" 
+                                        (touch)="onContinuarTouch($event)" 
+                                        [backgroundColor]="colorButtonContinuar"
+                                        class="{{ allowNext && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }}" 
+                                        isEnabled="{{ allowNext && !isLoading }}">
+                                </Button>
+                            </GridLayout>
+
+                        </GridLayout>
+                    </StackLayout>
+                    
+                    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+                </AbsoluteLayout>
+            </StackLayout>
+
+            <StackLayout tkDrawerContent class="bottom-drawer-content">
+                <StackLayout class="title-page titulo-questao" *ngIf="mostrarSaibaMais  && currentBottomDrawer === 1">
+                    <GridLayout rows="20, 5, *, 50">
+                        <Label row="0" [text]="tituloSaibaMais" textWrap="true" class="title-top"></Label>
+                        <StackLayout row="1" class="title-line"></StackLayout>
+                        <StackLayout row="2">
+                            <ScrollView>
+                                <Label [text]="descricaoSaibaMais" textWrap="true" class="title-bottom"></Label>
+                            </ScrollView>
+                        </StackLayout>
+                        
+                        <GridLayout row="3" rows="50", columns="*, *">
+                            <Button row="0" col="0" text="LER REFERÊNCIA" 
+                                (tap)="openUrl()" 
+                                class="button-sumary-left"></Button>
+                        </GridLayout>
+                    </GridLayout>
+                </StackLayout>
+
+                <StackLayout class="title-page titulo-questao" *ngIf="mostraAtividadesSelecionadas && currentBottomDrawer === 2">
+                    <GridLayout rows="20, 5, 50, *">
+                        <Label row="0" text="ATIVIDADES RELACIONADAS" textWrap="true" class="title-top"></Label>
+                        <StackLayout row="1" class="title-line"></StackLayout>
+                        <Label row="2" text="Veja as atividades que possuem relação com essa questão." textWrap="true" class="title-bottom"></Label>
+                        <StackLayout  row="3">
+                            <StackLayout *ngFor="let item of atividadesSelecionadas">
+                                <Label [text]="item.nome.toUpperCase()" class="item-atividade"  textWrap="true"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+                
+                <StackLayout *ngIf="currentBottomDrawer === 3">   
+                    <StackLayout class="breadcrumb-container">
+                        <ScrollView>
+                            <StackLayout>
+                            <StackLayout *ngFor="let item of breadcrumbList">
+
+                                <StackLayout *ngIf="!item.active" class="breadcrumb-item" (tap)="onBreadcrumbItemTap(item)">
+                                    <GridLayout rows="*" columns="25, *, 25">
+                                    <Label row="0" col="0" class="icon" text="&#xe906;"
+                                            style="color: #00b4b9; margin-top: 3px"></Label>
+
+                                    <Label row="0" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+                                    </GridLayout>
+                                </StackLayout>
+
+                                <StackLayout *ngIf="item.active" class="breadcrumb-item-active" (tap)="onBreadcrumbItemTap(item)">
+                                    <GridLayout rows="*, *, *, *, *" columns="30, *, 5, 30">
+
+                                    <Label row="0" col="1" textWrap="true" text="{{ item.current ? 'Você está aqui' : 'Você passou por aqui' }}" class="sub-titulo"></Label>
+
+                                    <Label row="1" col="0" class="icon" text="&#xe903;"
+                                            style="color: #FFFFFF; margin-top: 3px"></Label>
+
+                                    <Label row="1" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+
+                                    <StackLayout row="2" colSpan="2" class="title-line"></StackLayout>
+
+                                    <StackLayout row="2" col="3" class="simbol-doubt" backgroundColor="#FFFFFF" (tap)="onBreadcrumbNavigate(item)">
+                                        <Label class="icon" text="&#xe907;" color="#006eb9"></Label>
+                                    </StackLayout>
+
+                                    <Label *ngIf="!item.current" row="3" col="1" textWrap="true"  class="sub-titulo" text="Sua resposta foi"></Label>
+                                    <Label row="4" col="1" textWrap="true" [text]="item.respostasTexto"></Label>
+
+                                    </GridLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </RadSideDrawer> 
+    </StackLayout>
+    <StackLayout [left]="buttonCloseDrawerWidth" [top]="buttonCloseDrawerHeigth" visibility="{{ showBottom ? 'visible' : 'collapsed' }}">
+        <StackLayout class="simbol-doubt-drawer" borderWidth="1" borderColor="#FFFFFF" backgroundColor="#F5F5F5" (tap)="closeDrawer()">
+            <Label class="icon" text="&#xe90a;" color="#00B4B9"></Label>
+        </StackLayout>
+    </StackLayout>
+</AbsoluteLayout>

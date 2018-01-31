@@ -1,0 +1,31 @@
+<GridLayout rows="*" class="" backgroundColor="#F5F5F5">
+    <StackLayout row="0" horizontalAlignment="left" backgroundColor="#F5F5F5">
+        <StackLayout class="title-page container-box questao">
+            <Label text="LICENCIAMENTOS" textWrap="true" class="title-top"></Label>
+            <StackLayout class="title-line"></StackLayout>
+            <Label text="Confira os licenciamentos que você deve fazer com base em suas respostas do questionário" textWrap="true" class="title-bottom"></Label>
+        </StackLayout>
+        <StackLayout>
+            <ListView [items]="licencasListView">
+                <template let-item="item">
+                    <StackLayout class="title-page container-box">
+                        <Label [text]="item.tipoLicenca" textWrap="true" class="bold small-spacing"></Label>
+                        <StackLayout class="title-line light"></StackLayout>
+                        <StackLayout>
+                            <StackLayout *ngFor="let atividade of item.atividades">
+                                <Label row="1" [text]="atividade.nome" textWrap="true" class="small-spacing"> </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout visibility="{{ item.atividades.length > 0 ? 'visible' : 'collapsed' }}" class="title-line light"></StackLayout>
+                        <StackLayout>
+                            <StackLayout *ngFor="let endereco of item.enderecos">
+                                <Label row="1" [text]="endereco.nome" textWrap="true" class="x-small-spacing"> </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout class="title-line light"></StackLayout>
+                    </StackLayout>                    
+                </template>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</GridLayout>

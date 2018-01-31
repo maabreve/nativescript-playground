@@ -1,0 +1,15 @@
+.container-agendamento {
+	padding: 15px;
+}
+.data-insert {
+	padding: 30px;
+}
+.input-field{
+	margin-bottom: 20px;
+}	
+.label {
+	font-weight: bold;
+}
+.item-hora {
+	width: 100%;
+}

@@ -1,0 +1,19 @@
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%">
+        <ScrollView>
+            <StackLayout height="100%" width="100%" [backgroundColor]="colorView" color="#FFFFFF" class="container">
+
+                <Label text="JÁ SABEMOS QUE VOCÊ PRECISA DE UM:" textWrap="true" class="linha-maps"></Label>
+                <StackLayout  *ngFor="let item of instrumentoMindMapList"  class="linha">
+                    <Label class="label" [text]="item"></Label>
+                </StackLayout>
+                <Label text="ANTES DE COMEÇAR PRECISAMOS FAZER MAIS ALGUMAS PERGUNTAS, TUDO BEM?" textWrap="true" class="linha"></Label>
+                <Button (tap)="onTapContinuar()" (touch)="onContinuarTouch($event)" [backgroundColor]="colorButtonContinuar" 
+                    class="button linha-button" text="CONTINUAR RESPONDENDO"></Button>
+                <!-- <Button (tap)="onTapProsseguir()" (touch)="onProsseguirTouch($event)" [backgroundColor]="colorButtonProsseguir" class="button-transparent" text="PROSSEGUIR COM OS ITENS ENCONTRADOS"></Button>
+                -->
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

@@ -1,0 +1,52 @@
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%" backgroundColor="#F5F5F5">
+        <GridLayout rows="*, 80">
+            <StackLayout row="0" col="0" horizontalAlignment="left">
+                <GridLayout rows="50, *">
+                    <Label col="0" row="0" text="Agendamento para {{ dataAgendamento }} {{ horaAgendamento }}" class="title1 title-page" horizontalAlignment="left"></Label>
+
+                    <StackLayout class="box-container" row="2" col="0" horizontalAlignment="left" visibility="{{ tela === 'lista' ? 'visible' : 'collapsed'  }}">
+                        <ListView [items]="horariosLisView" (itemTap)="onSelect($event)">
+                            <template let-item="item">
+                                    <StackLayout >
+                                        <Label col="1" [text]="item.hora" class="medium-spacing item-hora"></Label>
+                                    </StackLayout>
+                            </template>
+                        </ListView>
+                    </StackLayout>
+                    
+                    <GridLayout class="data-insert" row="3" rows="*" columns="*" visibility="{{ tela === 'edicao' ? 'visible' : 'collapsed' }}">
+                        <ScrollView row="0" col="0">
+                            <StackLayout class="form">
+                                <StackLayout class="input-field">
+                                    <Label class="label" text="Telefone" row="2" col="0" textWrap="true"></Label>
+                                    <TextField #maskedInputTelfone row="0" col="1" keyboardType="number"
+                                        hint="Informe o seu telefone" style="font-size:12;"
+                                        (propertyChange)="onChangeTelefone($event)">
+                                    </TextField>
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                    </GridLayout>
+
+                </GridLayout>
+            </StackLayout>
+
+            <GridLayout row="1" columns="*, 10, *" class="summary">
+
+                <Button text="VOLTAR" row="0" col="0" (tap)="onBack()" (touch)="onBackTouch($event)" [backgroundColor]="colorButtonVoltar"
+                    class='button-sumary' class="{{ !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                    isEnabled="{{ !isLoading }}">
+                </Button>
+                <Button text="AGENDAR" row="0" col="2" (tap)="onSchedule()" 
+                    class='button-sumary' (touch)="onAgendarTouch($event)" [backgroundColor]="colorButtonAgendar"
+                    class="{{ tela === 'edicao' && canSchedule && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }}"
+                    isEnabled="{{ tela === 'edicao' && canSchedule && !isLoading }}">
+                </Button>
+                
+            </GridLayout>
+
+        </GridLayout>
+    </StackLayout>
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

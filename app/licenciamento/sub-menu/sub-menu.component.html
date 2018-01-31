@@ -1,0 +1,15 @@
+<ScrollView>
+    <AbsoluteLayout>
+        <StackLayout left="0" top="0" width="100%">
+            <StackLayout *ngFor="let item of menuList" (tap)="onTap(item)">
+                <GridLayout columns="*, 40" rows="*, 40" height="220" [style.background-color]="item.cor">
+                    <Label class="textMenu" textWrap="true" row="0" col="0" [text]="item.label"></Label>
+                    <StackLayout class="simbol-doubt" row="1" col="1" borderWidth="1" borderColor="#FFF">
+                        <Label class="icon" text="&#xe907;" verticalAlignment="center"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </StackLayout>
+        <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+    </AbsoluteLayout>
+</ScrollView>

@@ -1,0 +1,10 @@
+diff a/INEA_NS/app/licenciamento/sub-menu/sub-menu.component.css b/INEA_NS/app/licenciamento/sub-menu/sub-menu.component.css	(rejected hunks)
+@@ -16,7 +16,6 @@
+ .item-laranja {
+ 	background-color: #b97500;
+ }
+-
+ .simbol-doubt {
+     vertical-align: bottom;
+ }
+\ No newline at end of file

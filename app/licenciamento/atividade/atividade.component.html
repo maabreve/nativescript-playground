@@ -1,0 +1,231 @@
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%" [backgroundColor]="colorView">
+
+       <RadSideDrawer #bottomDrawer [transition]="sideDrawerTransition" selectionBehavior="None" drawerLocation="Bottom" drawerContentSize="400"
+            (drawerClosing)="onDrawerClosing()" (drawerOpened)="onDrawerOpened()" gesturesEnabled="false" >
+
+            <!-- ********** CONTENT DRAWER ********** -->
+            <StackLayout tkMainContent [backgroundColor]="colorView" color="#FFFFFF">
+                <AbsoluteLayout>
+                    <StackLayout left="0" top="0" height="100%" width="100%">
+                        <GridLayout rows=" *, 80">
+                            <StackLayout row="0">
+                                <StackLayout class="title-page" visibility="{{ currentAtividade === 'firstView' ? 'visible' : 'collapsed'  }}">
+                                    <Label textWrap="true" text="Selecione grupos, subgrupos e atividades do seu empreendimento" class="title-top"></Label>
+                                    <StackLayout class="title-line"></StackLayout>
+                                    <Label text="Você pode selecionar mais de uma atividade" class="title-bottom"></Label>
+                                </StackLayout>
+
+                                <StackLayout visibility="{{ currentAtividade !== 'firstView' ? 'visible' : 'collapsed' }}" (tap)="onRewind()">
+                                    <GridLayout class="title-breadcrumb dark-blue" rows="60" columns="40, *">
+                                        <Label row="0" col="0" class="icon rotate" text="&#xe907;" verticalAlignment="center" [color]="breadcrumbColor">
+                                        </Label>
+                                        <Label row="0" col="1" [text]="currentAtividade" textWrap="true" verticalAlignment="center" [color]="breadcrumbColor" class="breadcrumb title-top">
+                                        </Label>
+                                    </GridLayout>
+                                </StackLayout>
+
+                                <StackLayout class="box-container">
+                                    <TextField #sb [text]="pesquisaAtividade" (propertyChange)="onSearchChange($event)" [(ngModel)]="pesquisaAtividade"
+                                        (touch)="onPesquisarTouch($event)"
+                                        android:hint="@string/hint1" hint=" &#xe902; PESQUISAR" returnKeyType="next" keyboardType="string"
+                                        autocorrect="false" autocapitalizationType="none" class="icon search-button">
+                                    </TextField>
+                                </StackLayout>
+
+                                <!-- LISTA ATIVIDADES -->
+                                <StackLayout>
+                                    <ListView [items]="atividadeListView" separatorColor="transparent" isEnabled="{{ !isLoading }}">
+                                        <template let-item="item">
+                                            <StackLayout (tap)="onCheck(item)" class="">
+                                                <StackLayout [backgroundColor]="item.selecionado ? '#00b4b9' : item.color" padding="10">
+                                                    <StackLayout visibility="{{ item.possuiQuestionario && item.atividades.length > 0 ? 'visible' : 'collapsed' }}">
+                                                        <GridLayout columns="47, *, 97" rows="*">
+
+                                                            <StackLayout row="0" col="0" horizontalAlignment="right" verticalAlignment="center">
+                                                                <Label text="{{ item.selecionado ? '&#xe917;' : '&#xe900;' }}" class="opac {{ item.selecionado ? 'icon check-completed' : 'icon check' }}">
+                                                                </Label>
+                                                            </StackLayout>
+
+                                                            <StackLayout row="0" col="1" verticalAlignment="center" paddingLeft="10">
+                                                                <Label [text]="item.nome" textWrap="true" [color]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'">
+                                                                </Label>
+                                                            </StackLayout>
+
+                                                            <StackLayout row="0" col="2" verticalAlignment="center" minHeight="40" (tap)="onForward(item)">
+                                                                <StackLayout class="simbol-doubt" [borderWidth]="item.botaoAvancar ? 3 : 1" [borderColor]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'">
+                                                                    <Label class="icon" text="&#xe907;"  [color]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'"></Label>
+                                                                </StackLayout>
+                                                            </StackLayout>
+                                                        </GridLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout visibility="{{ item.possuiQuestionario && item.atividades.length === 0 ? 'visible' : 'collapsed' }}">
+                                                        <GridLayout columns="47, *, 30" rows="*">
+                                                            <StackLayout row="0" col="0" horizontalAlignment="right" verticalAlignment="center">
+                                                                <Label text="{{ item.selecionado ? '&#xe917;' : '&#xe900;' }}" class="opac {{ item.selecionado ? 'icon check-completed' : 'icon check' }}">
+                                                                </Label>
+                                                            </StackLayout>
+
+                                                            <StackLayout row="0" col="1" verticalAlignment="center" paddingLeft="10">
+                                                                <Label [text]="item.nome" textWrap="true">
+                                                                </Label>
+                                                            </StackLayout>
+                                                        </GridLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout visibility="{{ !item.possuiQuestionario && item.atividades.length > 0 ? 'visible' : 'collapsed' }}">
+                                                        <GridLayout columns="22, *, 95" rows="*">
+                                                            <StackLayout row="0" col="1" verticalAlignment="center" paddingLeft="10">
+                                                                <Label [text]="item.nome" textWrap="true" [color]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'">
+                                                                </Label>
+                                                            </StackLayout>
+                                                            <StackLayout row="0" col="2" verticalAlignment="center" minHeight="40" (tap)="onForward(item)">
+                                                                <StackLayout class="simbol-doubt" [borderWidth]="item.botaoAvancar ? 3 : 1" [borderColor]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'">
+                                                                    <Label class="icon" text="&#xe907;" [color]="item.botaoAvancar ? '#C3C3C3' : '#FFFFFF'"></Label>
+                                                                </StackLayout>
+                                                            </StackLayout>
+                                                        </GridLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout visibility="{{ !item.possuiQuestionario && item.atividades.length === 0 ? 'visible' : 'collapsed' }}">
+                                                        <GridLayout columns="20, *, 30" rows="*">
+                                                            <StackLayout row="0" col="1" minHeight="35" paddingTop="10" paddingBottom="10" paddingLeft="10">
+                                                                <Label [text]="item.nome" textWrap="true">
+                                                            </Label>
+                                                            </StackLayout>
+                                                        </GridLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <StackLayout class="item-container">
+                                                    <StackLayout class="line-container">
+                                                        <StackLayout class="border-bottom-line" visibility="{{ item.selecionado ? 'collapsed' : 'visible' }}"></StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+
+                                            </StackLayout>
+
+                                        </template>
+                                    </ListView>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <GridLayout  #bottomDrawer row="1" columns="*, 20, *" rows="10, *, 10" (tap)="toggleDrawer(1)" class="summary">
+                                <GridLayout row="1" col="0" columns="*, 10, *, 10, *">
+                                 
+                                    <Button row="0" col="0" (tap)="onNavigationBack()" (touch)="onVoltarTouch($event)" [backgroundColor]="colorButtonVoltar"
+                                            class="icon {{ canBackNavigation && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                                            text="&#xe908;" isEnabled="{{ canBackNavigation  && !isLoading }}">
+                                    </Button>
+                                    
+                                    <StackLayout row="0" col="1">
+                                    </StackLayout>
+                                    
+                                    <Button row="0" col="2" (tap)="toggleDrawer(2)" 
+                                            (touch)="onBreadcrumbTouch($event)" 
+                                            [backgroundColor]="colorButtonBreadcrumb"
+                                            class="icon {{ !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                                            isEnabled="{{ !isLoading }}" text="&#xe916;">
+                                    </Button>
+
+                                     <StackLayout row="0" col="3">
+                                    </StackLayout>
+
+                                    <Button [text]="selectedCount" row="0" col="4" 
+                                             (tap)="onDrawerTap()" 
+                                            isEnabled="{{ !isLoading }}" 
+                                            class="{{ selectedCount > 0 && !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}">
+                                    </Button>
+
+                                </GridLayout>
+
+                                <StackLayout row="1" col="1">
+                                </StackLayout>
+
+                                <Button text="CONTINUAR" #btnToggle row="1" col="2" (tap)="onAnswer()"
+                                            (touch)="onContinuarTouch($event)" 
+                                            [backgroundColor]="colorButtonContinuar"
+                                            class="{{ selectedCount > 0 && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }} "
+                                            isEnabled="{{ selectedCount > 0  && !isLoading }}">
+                                </Button>
+                            </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
+                    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+
+                </AbsoluteLayout>
+            </StackLayout>
+
+            <!-- ********** BOTTOM DRAWER ********** -->
+            <StackLayout tkDrawerContent class="bottom-drawer-content" >
+                <StackLayout class="padding-20" #bottomDrawer  *ngIf="currentBottomDrawer === 1">
+                    <GridLayout rows="40, *" class="box-container">
+                        <StackLayout row="0" (tap)="toggleDrawer(1)">
+                            <Label text="{{ selectedCount }}" class="label-num" horizontalAlignment="left"></Label>
+                            <Label text="{{ selectedLabel }}" textWrap="true"></Label>
+                        </StackLayout>
+                        <ListView row="1" [items]="atividadeListSelect" class="itens-selecionados">
+                            <template let-item="item">
+                                <ScrollView>
+                                    <GridLayout columns="35, *" rows="*" (tap)="onDelete(item)">
+                                        <Label col="0" text="&#xe904;" class="icon check-completed atividade-remove">
+                                                </Label>
+                                        <Label col="1" [text]="item.nome" class="medium-spacing"></Label>
+                                    </GridLayout>
+                                </ScrollView>
+                            </template>
+                        </ListView>
+                    </GridLayout>
+                </StackLayout>
+                 <StackLayout *ngIf="currentBottomDrawer === 2">   
+                    <StackLayout class="breadcrumb-container">
+                        <ScrollView>
+                            <StackLayout>
+                            <StackLayout *ngFor="let item of breadcrumbList">
+
+                                <StackLayout *ngIf="!item.active" class="breadcrumb-item" (tap)="onBreadcrumbItemTap(item)">
+                                    <GridLayout rows="*" columns="25, *, 25">
+                                    <Label row="0" col="0" class="icon" text="&#xe906;"
+                                            style="color: #00b4b9; margin-top: 3px"></Label>
+
+                                    <Label row="0" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+                                    </GridLayout>
+                                </StackLayout>
+
+                                <StackLayout *ngIf="item.active" class="breadcrumb-item-active" (tap)="onBreadcrumbItemTap(item)">
+                                    <GridLayout rows="*, *, *, *, *" columns="30, *, 5, 30">
+
+                                    <Label row="0" col="1" textWrap="true" text="{{ item.current ? 'Você está aqui' : 'Você passou por aqui' }}" class="sub-titulo"></Label>
+
+                                    <Label row="1" col="0" class="icon" text="&#xe903;"
+                                            style="color: #FFFFFF; margin-top: 3px"></Label>
+
+                                    <Label row="1" col="1" textWrap="true" text="{{ item.index + 1 }} - {{ item.etapaTexto }}"></Label>
+
+                                    <StackLayout row="2" colSpan="2" class="title-line"></StackLayout>
+
+                                    <StackLayout row="2" col="3" class="simbol-doubt" backgroundColor="#FFFFFF" (tap)="onBreadcrumbNavigate(item)">
+                                        <Label class="icon" text="&#xe907;" color="#006eb9"></Label>
+                                    </StackLayout>
+
+                                    <Label *ngIf="!item.current" row="3" col="1" textWrap="true"  class="sub-titulo" text="Sua resposta foi"></Label>
+                                    <Label row="4" col="1" textWrap="true" [text]="item.respostasTexto"></Label>
+
+                                    </GridLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </RadSideDrawer>
+    </StackLayout>
+
+    <StackLayout [left]="buttonCloseDrawerWidth" [top]="buttonCloseDrawerHeigth" visibility="{{ showBottom ? 'visible' : 'collapsed' }}">
+        <StackLayout class="simbol-doubt-drawer" borderWidth="1" borderColor="#FFFFFF" backgroundColor="#F5F5F5" (tap)="closeDrawer()">
+            <Label class="icon" text="&#xe90a;" color="#00B4B9"></Label>
+        </StackLayout>
+    </StackLayout>
+</AbsoluteLayout>

@@ -1,0 +1,62 @@
+<GridLayout rows="*, 80" class="main" [backgroundColor]="colorView">
+    <StackLayout row="0" horizontalAlignment="left" [backgroundColor]="colorView" color="#FFFFFF">
+        <StackLayout class="title-page">
+            <Label textWrap="false" text="Renovação de licença" class="title-top"></Label>
+            <StackLayout class="title-line"></StackLayout>
+            <Label textWrap="true" text="Informe o número e o tipo da licença" class="title-bottom"></Label>
+        </StackLayout>
+        <StackLayout class="box-container">
+            <Label textWrap="true" text="Número da Licença"></Label>
+            <TextField #respostaTextBox autocorrect="false" autocapitalizationType="none" [(ngModel)]="numeroLicenca">
+            </TextField>
+        </StackLayout>
+        <StackLayout class="title-page">
+            <Label textWrap="true" text="Tipo de Licença" class="title-margin-bottom"></Label>
+        </StackLayout>
+        <ListView [items]="tiposLicencaListView" class="main" separatorColor="#00000000">
+            <template let-item="item">
+                <ScrollView id="main">
+                    <StackLayout (tap)="onSelect(item)">
+                        <GridLayout columns="55, *" rows="auto" class="{{ item.selecionado ? 'item-check' : '' }}">
+                            <Label col="0" text="{{ item.selecionado ? '&#xe915;' : '&#xe914;' }}" horizontalAlignment="right" verticalAlignment="center"
+                                class="licenciamento-input {{ item.selecionado ? 'icon check-completed' : 'icon check' }}">
+                                </Label>
+                            <Label col="1" [text]="item.nome" textWrap="true" class="medium-spacing item-resposta" isEnabled="{{ !isLoading }}"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </ScrollView>
+            </template>
+        </ListView>
+    </StackLayout>
+
+    <ActivityIndicator row="0" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+
+    <GridLayout row="1" rows="10, *, 10" columns="*, 20, *" class="summary">
+        <GridLayout row="1" col="0" columns="*, 10, *, 10, * ">
+
+            <Button row="0" col="0" (tap)="onNavigationBack()" class="icon {{ canBackNavigation && !isLoading ?  'button-sumary' : 'button-sumary-disabled' }}"
+                text="&#xe908;" isEnabled="{{ canBackNavigation  && !isLoading }}">
+            </Button>
+
+            <StackLayout row="0" col="1"></StackLayout>
+
+            <Button row="0" col="2" (tap)="onBreadcrumbTap()"
+                class="icon {{ !isLoading ?  'button-sumary-left' : 'button-sumary-left-disabled' }}"
+                isEnabled="{{ !isLoading }}"
+                text="&#xe916;">
+            </Button>
+                                    
+
+        </GridLayout>
+
+        <StackLayout row="1" col="1"></StackLayout>
+
+        <Button text="CONTINUAR" row="1" col="2" (tap)="onAnswer()" 
+            class="{{ numeroLicenca.length > 1 && selecionou ? 'button-sumary' : 'button-sumary-disabled' }}"
+            isEnabled="{{ numeroLicenca.length > 1 && selecionou && !isLoading }}"
+            (touch)="onContinuarTouch($event)" 
+            [backgroundColor]="colorButtonContinuar">
+        </Button>
+
+    </GridLayout>
+</GridLayout>

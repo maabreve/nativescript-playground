@@ -1,0 +1,34 @@
+AbsoluteLayout {
+  background-color: #92b81f;
+  padding-top: 20;
+}
+
+.linha-itens {
+  padding: 10 40 10 40;
+}
+
+GridLayout {
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 16;
+}
+
+.simbol-doubt {
+  margin-top: -10;
+}
+
+.buttons-area {
+  background-color: #16b4b8;
+}
+
+.new-button {
+  margin: 30 40;
+  padding: 15 25;
+  color: #16b4b8;
+  background-color: white;
+  font-family: 'Roboto';
+  font-size: 16;
+}

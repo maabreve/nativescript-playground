@@ -1,0 +1,116 @@
+<AbsoluteLayout>
+    <StackLayout left="0" top="0" height="100%" width="100%">
+        <GridLayout columns="*" rows="75, *" class="text-align-center">
+
+            <GridLayout col="0" row="0" columns="80,*,80" rows="50">
+                <Label verticalAlignment="center" class="icon rotate" text="&#xe907;" 
+                        isEnabled="{{ allowRewind }}" (touch)="onTouchBack($event)" (tap)="onRewind()"></Label>
+                
+                <Label verticalAlignment="center" row="0" col="1" [text]="headerCalendar" isEnabled="{{ allowForward }}"></Label>
+                <Label verticalAlignment="center" row="0" col="2" class="icon"  text="&#xe907;" 
+                        (touch)="onTouchBack($event)" (tap)="onForward()"></Label>
+            </GridLayout>
+
+            <GridLayout col="0" row="1" columns="*,*,*,*,*,*,*" rows="30, *,*,*,*,*,*" class="calendario">
+                <Label row="0" col="0" Text="DOM"></Label>
+                <Label row="0" col="1" Text="SEG"></Label>
+                <Label row="0" col="2" Text="TER"></Label>
+                <Label row="0" col="3" Text="QUA"></Label>
+                <Label row="0" col="4" Text="QUI"></Label>
+                <Label row="0" col="5" Text="SEX"></Label>
+                <Label row="0" col="6" Text="SAB"></Label>
+
+                <Label row="1" col="0" [Text]="dates[0]" isEnabled="{{ datesCss[0] }}" class="{{ datesCss[0]  ? 'available' : 'unavailable' }}"
+                   (touch)="onTouch($event)" (tap)="onDateSelect(0)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="1" [Text]="dates[1]" isEnabled="{{ datesCss[1] }}" class="{{ datesCss[1]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(1)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="2" [Text]="dates[2]" isEnabled="{{ datesCss[2] }}" class="{{ datesCss[2]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(2)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="3" [Text]="dates[3]" isEnabled="{{ datesCss[3] }}" class="{{ datesCss[3]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(3)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="4" [Text]="dates[4]" isEnabled="{{ datesCss[4] }}" class="{{ datesCss[4]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(4)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="5" [Text]="dates[5]" isEnabled="{{ datesCss[5] }}" class="{{ datesCss[5]  ? 'available' : 'unavailable' }}"
+                   (touch)="onTouch($event)" (tap)="onDateSelect(5)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="1" col="6" [Text]="dates[6]" isEnabled="{{ datesCss[6] }}" class="{{ datesCss[6]  ? 'available' : 'unavailable' }}"
+                   (touch)="onTouch($event)" (tap)="onDateSelect(6)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+
+                <Label row="2" col="0" [Text]="dates[7]" isEnabled="{{ datesCss[7] }}" class="{{ datesCss[7] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(7)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="1" [Text]="dates[8]" isEnabled="{{ datesCss[8] }}" class="{{ datesCss[8] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(8)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="2" [Text]="dates[9]" isEnabled="{{ datesCss[9] }}" class="{{ datesCss[9] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(9)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="3" [Text]="dates[10]" isEnabled="{{ datesCss[10] }}" class="{{ datesCss[10] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(10)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="4" [Text]="dates[11]" isEnabled="{{ datesCss[11] }}" class="{{ datesCss[11] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(11)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="5" [Text]="dates[12]" isEnabled="{{ datesCss[12] }}" class="{{ datesCss[12] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(12)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="2" col="6" [Text]="dates[13]" isEnabled="{{ datesCss[13] }}" class="{{ datesCss[13] ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(13)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+
+                <Label row="3" col="0" [Text]="dates[14]" isEnabled="{{ datesCss[14] }}" class="{{ datesCss[14]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(14)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="1" [Text]="dates[15]" isEnabled="{{ datesCss[15] }}" class="{{ datesCss[15]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(15)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="2" [Text]="dates[16]" isEnabled="{{ datesCss[16] }}" class="{{ datesCss[16]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(16)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="3" [Text]="dates[17]" isEnabled="{{ datesCss[17] }}" class="{{ datesCss[17]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(17)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="4" [Text]="dates[18]" isEnabled="{{ datesCss[18] }}" class="{{ datesCss[18]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(18)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="5" [Text]="dates[19]" isEnabled="{{ datesCss[19] }}" class="{{ datesCss[19]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(19)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="3" col="6" [Text]="dates[20]" isEnabled="{{ datesCss[20] }}" class="{{ datesCss[20]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(20)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+
+                <Label row="4" col="0" [Text]="dates[21]" isEnabled="{{ datesCss[21] }}" class="{{ datesCss[21]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(21)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="1" [Text]="dates[22]" isEnabled="{{ datesCss[22] }}" class="{{ datesCss[22]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(22)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="2" [Text]="dates[23]" isEnabled="{{ datesCss[23] }}" class="{{ datesCss[23]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(23)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="3" [Text]="dates[24]" isEnabled="{{ datesCss[24] }}" class="{{ datesCss[24]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(24)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="4" [Text]="dates[25]" isEnabled="{{ datesCss[25] }}" class="{{ datesCss[25]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(25)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="5" [Text]="dates[26]" isEnabled="{{ datesCss[26] }}" class="{{ datesCss[26]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(26)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="4" col="6" [Text]="dates[27]" isEnabled="{{ datesCss[27] }}" class="{{ datesCss[27]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(27)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+
+                <Label row="5" col="0" [Text]="dates[28]" isEnabled="{{ datesCss[28] }}" class="{{ datesCss[28]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(28)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="1" [Text]="dates[29]" isEnabled="{{ datesCss[29] }}" class="{{ datesCss[29]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(29)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="2" [Text]="dates[30]" isEnabled="{{ datesCss[30] }}" class="{{ datesCss[30]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(30)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="3" [Text]="dates[31]" isEnabled="{{ datesCss[31] }}" class="{{ datesCss[31]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(31)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="4" [Text]="dates[32]" isEnabled="{{ datesCss[32] }}" class="{{ datesCss[32]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(32)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="5" [Text]="dates[33]" isEnabled="{{ datesCss[33] }}" class="{{ datesCss[33]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(33)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="5" col="6" [Text]="dates[34]" isEnabled="{{ datesCss[34] }}" class="{{ datesCss[34]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(34)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+
+                <Label row="6" col="0" [Text]="dates[35]" isEnabled="{{ datesCss[35] }}" class="{{ datesCss[35]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(35)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="1" [Text]="dates[36]" isEnabled="{{ datesCss[36] }}" class="{{ datesCss[36]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(36)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="2" [Text]="dates[37]" isEnabled="{{ datesCss[37] }}" class="{{ datesCss[37]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(37)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="3" [Text]="dates[38]" isEnabled="{{ datesCss[38] }}" class="{{ datesCss[38]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(38)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="4" [Text]="dates[39]" isEnabled="{{ datesCss[39] }}" class="{{ datesCss[39]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(39)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="5" [Text]="dates[40]" isEnabled="{{ datesCss[40] }}" class="{{ datesCss[40]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(40)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+                <Label row="6" col="6" [Text]="dates[41]" isEnabled="{{ datesCss[41] }}" class="{{ datesCss[41]  ? 'available' : 'unavailable' }}"
+                    (touch)="onTouch($event)" (tap)="onDateSelect(41)" horizontalAlignment="stretch" verticalAlignment="center"></Label>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

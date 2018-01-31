@@ -1,0 +1,143 @@
+<AbsoluteLayout>
+
+  <DockLayout
+    left="0"
+    top="0"
+    height="100%"
+    width="100%"
+    stretchLastChild="true"
+    class="container">
+
+    <StackLayout
+      dock="top"
+      class="label-text-container">
+
+      <StackLayout class="create-account-area-label">
+        <Label
+          text="Criar conta"
+          class="create-account-label"></Label>
+      </StackLayout>
+
+      <Label
+        [text]="textLabel"
+        class="create-account-tex-label"></Label>
+
+      <TextField
+        hint="Nome completo"
+        [(ngModel)]="user.name"
+        [isEnabled]="!isAuthenticating"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-nome"></TextField>
+
+      <TextField
+        hint="E-mail"
+        [(ngModel)]="user.email"
+        visibility="{{isSocialLogin ? 'collapsed' : 'visible'}}"
+        [isEnabled]="!isAuthenticating"
+        keyboardType="email"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-email"></TextField>
+
+      <TextField
+        hint="E-mail"
+        [(ngModel)]="user.email"
+        visibility="{{isSocialLogin ? 'visible' : 'collapsed'}}"
+        [isEnabled]="false"
+        keyboardType="email"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-email"></TextField>
+
+      <TextField
+        hint="Confirmar e-mail"
+        [(ngModel)]="confirmEmail"
+        visibility="{{isSocialLogin ? 'collapsed' : 'visible'}}"
+        [isEnabled]="!isAuthenticating"
+        keyboardType="email"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-email"></TextField>
+
+      <TextField
+        hint="CPF/CNPJ"
+        [(ngModel)]="user.cpf_cnpj"
+        [isEnabled]="!isAuthenticating"
+        keyboardType="number"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-cpf-cnpj"></TextField>
+
+      <TextField
+        hint="Senha"
+        [(ngModel)]="user.password"
+        visibility="{{isSocialLogin ? 'collapsed' : 'visible'}}"
+        [isEnabled]="!isAuthenticating"
+        secure="true"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-senha"></TextField>
+
+      <TextField
+        hint="Confirmar senha"
+        [(ngModel)]="confirmPass"
+        visibility="{{isSocialLogin ? 'collapsed' : 'visible'}}"
+        [isEnabled]="!isAuthenticating"
+        secure="true"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-senha-conf"></TextField>
+
+      <!-- <TextField
+        hint="Telefone"
+        [(ngModel)]="user.phone"
+        visibility="{{isSocialLogin ? 'visible' : 'collapsed'}}"
+        [isEnabled]="!isAuthenticating"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        class="text-telefone"></TextField> -->
+
+    </StackLayout>
+
+    <GridLayout
+      dock="bottom"
+      columns="auto,*,auto"
+      rows="auto"
+      class="buttons-area">
+
+      <Button
+        #backButton
+        text="Voltar"
+        class="{{isAuthenticating ? 'back-button-deactive' : 'back-button'}}"
+        (tap)="back()"
+        row="0"
+        col="0"
+        (touch)="onBackTouch($event, backButton)"
+        horizontalAlignment="left"></Button>
+
+      <Button
+        #submitButton
+        text="Continuar"
+        class="{{isAuthenticating ? 'submit-button-deactive' : 'submit-button'}}"
+        (tap)="submit()"
+        row="0"
+        col="2"
+        (touch)="onSubmitTouch($event, submitButton)"
+        horizontalAlignment="right"></Button>
+
+    </GridLayout>
+
+    <StackLayout></StackLayout>
+
+  </DockLayout>
+
+  <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+</AbsoluteLayout>

@@ -1,0 +1,40 @@
+<ScrollView>
+  <AbsoluteLayout>
+    <StackLayout left="0" top="0" width="100%">
+
+      <StackLayout (tap)="goToAgendar()">
+          <GridLayout class="agendar-button" columns="*, 40" rows="*, 40" height="220" [style.background-color]="colorButtonAgendar">
+              <Label class="button-label" textWrap="true" row="0" col="0">
+                <FormattedString>
+                  <Span text="Deseja "></Span>
+                  <Span text="agendar " fontAttributes="Bold"></Span>
+                  <Span text="uma visita?"></Span>
+                </FormattedString>
+              </Label>
+              <StackLayout class="simbol-doubt" row="1" col="1" borderWidth="1" borderColor="#FFF">
+                  <Label class="icon" text="&#xe907;" verticalAlignment="center"></Label>
+              </StackLayout>
+          </GridLayout>
+      </StackLayout>
+
+      <StackLayout (tap)="goToLista()">
+          <GridLayout class="visualizar-button" columns="*, 40" rows="*, 40" height="220" [style.background-color]="colorButtonLista">
+              <Label class="button-label" textWrap="true" row="0" col="0">
+                <FormattedString>
+                  <Span text="Deseja "></Span>
+                  <Span text="visualizar " fontAttributes="Bold"></Span>
+                  <Span text="seus "></Span>
+                  <Span text="agendamentos " fontAttributes="Bold"></Span>
+                  <Span text="?"></Span>
+                </FormattedString>
+              </Label>
+              <StackLayout class="simbol-doubt" row="1" col="1" borderWidth="1" borderColor="#FFF">
+                  <Label class="icon" text="&#xe907;" verticalAlignment="center"></Label>
+              </StackLayout>
+          </GridLayout>
+      </StackLayout>
+
+    </StackLayout>
+    <ActivityIndicator [left]="screenW" [top]="screenH" [busy]="isLoading" class="active-indicator-sm"></ActivityIndicator>
+  </AbsoluteLayout>
+</ScrollView>
